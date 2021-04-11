@@ -39,9 +39,9 @@ export default {
     };
     const handleChange = (e) => {
       const selected = e.target.files[0];
-      console.log(selected);
       // Allowed file types
       const types = ["image/png", "image/jpeg", "image/jpg"];
+
       if (selected && types.includes(selected.type)) {
         coverImageFile.value = selected;
         coverImageFileError.value = null;
