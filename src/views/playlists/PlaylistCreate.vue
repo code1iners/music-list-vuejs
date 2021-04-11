@@ -25,16 +25,23 @@
 
 <script>
 import { ref } from "vue";
+import useStorage from "@/composables/useStorage";
+
 export default {
   setup() {
+    const { url, filePath, isPending, error, uploadImage } = useStorage();
+
     const title = ref("");
     const description = ref("");
     const coverImageFile = ref(null);
     const coverImageFileError = ref(null);
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
       if (coverImageFile.value) {
-        console.log(title.value, description.value, coverImageFile.value);
+        await uploadImage(coverImageFile.value);
+        console.log(
+          `image uploaded, url : ${url.value}, filePath : ${filePath.value}`
+        );
       }
     };
     const handleChange = (e) => {
@@ -58,6 +65,8 @@ export default {
       handleSubmit,
       handleChange,
       coverImageFileError,
+      isPending,
+      error,
     };
   },
 };

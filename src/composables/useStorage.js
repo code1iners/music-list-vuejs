@@ -1,5 +1,5 @@
 import { ref } from "vue";
-import firestorage from "@/firebase/config";
+import { firestorage } from "@/firebase/config";
 import getUser from "../composables/getUser";
 
 const { user } = getUser();
@@ -14,12 +14,12 @@ const useStorage = () => {
     if (user) {
       isPending.value = true;
 
-      filePath.value = `covers/${user.uid}/${file.name}`;
+      filePath.value = `covers/${user.value.uid}/${file.name}`;
       const storageRef = firestorage.ref(filePath.value);
 
       try {
         const res = await storageRef.put(file);
-        url.value = res.ref.getDownloadUrl();
+        url.value = res.ref.getDownloadURL();
         isPending.value = false;
       } catch (err) {
         console.log(err.message);
@@ -29,7 +29,13 @@ const useStorage = () => {
     }
   };
 
-  return { url, filePath, isPending, error, uploadImage };
+  return {
+    url,
+    filePath,
+    isPending,
+    error,
+    uploadImage,
+  };
 };
 
 export default useStorage;
