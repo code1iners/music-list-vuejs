@@ -11,15 +11,14 @@ const useStorage = () => {
   const isPending = ref(false);
 
   const uploadImage = async (file) => {
+    isPending.value = true;
     if (user) {
-      isPending.value = true;
-
       filePath.value = `covers/${user.value.uid}/${file.name}`;
       const storageRef = firestorage.ref(filePath.value);
 
       try {
         const res = await storageRef.put(file);
-        url.value = res.ref.getDownloadURL();
+        url.value = await res.ref.getDownloadURL();
         isPending.value = false;
       } catch (err) {
         console.log(err.message);

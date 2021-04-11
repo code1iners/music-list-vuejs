@@ -19,29 +19,52 @@
     <input id="cover-image" type="file" @change="handleChange" />
     <div class="error fileError">{{ coverImageFileError }}</div>
     <div class="error"></div>
-    <button class="mt-7">Create</button>
+    <button v-if="!isPending" class="mt-7">Create</button>
+    <button v-else class="mt-7" :class="{ disabled: isPending }">
+      Saving...
+    </button>
   </form>
 </template>
 
 <script>
 import { ref } from "vue";
 import useStorage from "@/composables/useStorage";
+import useCollection from "@/composables/useCollection";
+import getUser from "@/composables/getUser";
+import { timestamp } from "@/firebase/config";
 
 export default {
   setup() {
-    const { url, filePath, isPending, error, uploadImage } = useStorage();
+    const { url, filePath, error: storageError, uploadImage } = useStorage();
+    const { addDoc, error: collectionError } = useCollection("playlist");
+    const { user } = getUser();
 
     const title = ref("");
     const description = ref("");
     const coverImageFile = ref(null);
     const coverImageFileError = ref(null);
+    const isPending = ref(false);
 
     const handleSubmit = async () => {
       if (coverImageFile.value) {
+        isPending.value = true;
         await uploadImage(coverImageFile.value);
-        console.log(
-          `image uploaded, url : ${url.value}, filePath : ${filePath.value}`
-        );
+        await addDoc({
+          title: title.value,
+          description: description.value,
+          userId: user.value.uid,
+          userName: user.value.displayName,
+          coverUrl: url.value,
+          filePath: filePath.value,
+          songs: [],
+          createdAt: timestamp(),
+        });
+
+        isPending.value = false;
+
+        if (!collectionError.value) {
+          console.log("playlist added");
+        }
       }
     };
     const handleChange = (e) => {
@@ -66,7 +89,7 @@ export default {
       handleChange,
       coverImageFileError,
       isPending,
-      error,
+      storageError,
     };
   },
 };
