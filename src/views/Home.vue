@@ -1,5 +1,8 @@
 <template>
-  <div class="home bg-red-500">Homepage</div>
+  <div class="home">
+    <h1 class="">Homepage</h1>
+    <button class="disabled">button</button>
+  </div>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="main-container text">
+  <div class="content mx-auto max-w-screen-xl py-10">
     <router-view />
   </div>
 </template>
