@@ -22,14 +22,15 @@ import useSignIn from "@/composables/useSignIn";
 
 export default {
   setup() {
+    const { signIn, isPending, error } = useSignIn();
+
     const email = ref("");
     const password = ref("");
-    const { signIn, isPending, error } = useSignIn();
-    const handleSubmit = () => {
-      console.log("submit");
-      const res = signIn(email.value, password.value);
-      if (!res) {
-        console.log("successed");
+
+    const handleSubmit = async () => {
+      await signIn(email.value, password.value);
+      if (!error.value) {
+        console.log("user logged in");
       }
     };
 

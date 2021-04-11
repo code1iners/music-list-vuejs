@@ -8,7 +8,7 @@
         </h1>
       </router-link>
       <div class="links">
-        <span class="btn-text">Sign out</span>
+        <span class="btn-text" @click="handleSignOut">Sign out</span>
         <router-link :to="{ name: 'SignUp' }" class="btn-text mx-3"
           >Sign up</router-link
         >
@@ -21,7 +21,28 @@
 </template>
 
 <script>
-export default {};
+import { useRouter } from "vue-router";
+// import { onMounted } from "@vue/runtime-core";
+// import getUser from "@/composables/getUser";
+import useSignOut from "@/composables/useSignOut";
+
+export default {
+  setup() {
+    const router = useRouter();
+    const { signOut, isPending, error } = useSignOut();
+
+    // const { user } = getUser();
+    const handleSignOut = async () => {
+      await signOut();
+      if (!error.value) {
+        console.log("Sign out successed");
+        router.push({ name: "Home" });
+      }
+    };
+
+    return { handleSignOut, isPending, error };
+  },
+};
 </script>
 
 <style></style>

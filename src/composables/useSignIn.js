@@ -8,12 +8,8 @@ const signIn = async (email, password) => {
   isPending.value = true;
   try {
     const res = await fireauth.signInWithEmailAndPassword(email, password);
-    if (!res) {
-      throw new Error("Could not complete sign in");
-    }
     error.value = null;
     isPending.value = false;
-
     return res;
   } catch (err) {
     console.log(err.message);
