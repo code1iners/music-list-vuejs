@@ -1,7 +1,15 @@
 <template>
-  <div id="app" class="content mx-auto max-w-screen-xl py-10">
+  <Navbar />
+  <div class="content">
     <router-view />
   </div>
 </template>
+
+<script>
+import Navbar from "@/components/Navbar.vue";
+export default {
+  components: { Navbar },
+};
+</script>
 
 <style></style>
