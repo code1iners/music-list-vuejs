@@ -9,7 +9,7 @@ fireauth.onAuthStateChanged((_user) => {
 });
 
 const getUser = () => {
-  return { user };
+  return { user: user.value };
 };
 
 export default getUser;
