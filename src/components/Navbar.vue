@@ -8,13 +8,17 @@
         </h1>
       </router-link>
       <div class="links">
-        <span class="btn-text" @click="handleSignOut">Sign out</span>
-        <router-link :to="{ name: 'SignUp' }" class="btn-text mx-3"
-          >Sign up</router-link
-        >
-        <router-link :to="{ name: 'SignIn' }" class="btn-text"
-          >Sign in</router-link
-        >
+        <div v-if="user">
+          <span class="btn-text" @click="handleSignOut">Sign out</span>
+        </div>
+        <div v-else>
+          <router-link :to="{ name: 'SignUp' }" class="btn-text mx-3"
+            >Sign up</router-link
+          >
+          <router-link :to="{ name: 'SignIn' }" class="btn-text"
+            >Sign in</router-link
+          >
+        </div>
       </div>
     </nav>
   </div>
@@ -22,8 +26,7 @@
 
 <script>
 import { useRouter } from "vue-router";
-// import { onMounted } from "@vue/runtime-core";
-// import getUser from "@/composables/getUser";
+import getUser from "@/composables/getUser";
 import useSignOut from "@/composables/useSignOut";
 
 export default {
@@ -31,16 +34,15 @@ export default {
     const router = useRouter();
     const { signOut, isPending, error } = useSignOut();
 
-    // const { user } = getUser();
+    const { user } = getUser();
     const handleSignOut = async () => {
       await signOut();
       if (!error.value) {
-        console.log("Sign out successed");
         router.push({ name: "Home" });
       }
     };
 
-    return { handleSignOut, isPending, error };
+    return { handleSignOut, isPending, error, user };
   },
 };
 </script>

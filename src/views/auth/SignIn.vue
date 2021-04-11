@@ -19,9 +19,11 @@
 <script>
 import { ref } from "vue";
 import useSignIn from "@/composables/useSignIn";
+import { useRouter } from "vue-router";
 
 export default {
   setup() {
+    const router = useRouter();
     const { signIn, isPending, error } = useSignIn();
 
     const email = ref("");
@@ -30,7 +32,7 @@ export default {
     const handleSubmit = async () => {
       await signIn(email.value, password.value);
       if (!error.value) {
-        console.log("user logged in");
+        router.push({ name: "Home" });
       }
     };
 
