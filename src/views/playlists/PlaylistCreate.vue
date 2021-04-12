@@ -28,6 +28,7 @@
 
 <script>
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 import useStorage from "@/composables/useStorage";
 import useCollection from "@/composables/useCollection";
 import getUser from "@/composables/getUser";
@@ -35,8 +36,9 @@ import { timestamp } from "@/firebase/config";
 
 export default {
   setup() {
+    const router = useRouter();
     const { url, filePath, error: storageError, uploadImage } = useStorage();
-    const { addDoc, error: collectionError } = useCollection("playlist");
+    const { addDoc, error: collectionError } = useCollection("playlists");
     const { user } = getUser();
 
     const title = ref("");
@@ -64,6 +66,7 @@ export default {
 
         if (!collectionError.value) {
           console.log("playlist added");
+          router.push({ name: "Home" });
         }
       }
     };

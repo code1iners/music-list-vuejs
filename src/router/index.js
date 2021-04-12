@@ -3,6 +3,7 @@ import Home from "../views/Home.vue";
 import SignIn from "../views/auth/SignIn.vue";
 import SignUp from "../views/auth/SignUp.vue";
 import PlaylistCreate from "../views/playlists/PlaylistCreate.vue";
+import PlaylistDetail from "../views/playlists/PlaylistDetail.vue";
 
 const routes = [
   {
@@ -21,9 +22,14 @@ const routes = [
     component: SignUp,
   },
   {
-    path: "/playlist/create",
+    path: "/playlists/create",
     name: "PlaylistCreate",
     component: PlaylistCreate,
+  },
+  {
+    path: "/playlists/:id",
+    name: "PlaylistDetail",
+    component: PlaylistDetail,
   },
 ];
 
