@@ -10,7 +10,7 @@
 <script>
 // @ is an alias to /src
 import getCollection from "../composables/getCollection";
-import ListView from "@/components/ListView.vue";
+import ListView from "../components/ListView.vue";
 
 export default {
   name: "Home",

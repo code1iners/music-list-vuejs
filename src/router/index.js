@@ -1,37 +1,9 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "../views/Home.vue";
-import SignIn from "../views/auth/SignIn.vue";
-import SignUp from "../views/auth/SignUp.vue";
-import PlaylistCreate from "../views/playlists/PlaylistCreate.vue";
-import PlaylistDetail from "../views/playlists/PlaylistDetail.vue";
+import Routes from "../router/routes/Routes";
+import RoutePlaylist from "../router/routes/playlists/RoutePlaylist";
+import RouteAuth from "../router/routes/auth/RouteAuth";
 
-const routes = [
-  {
-    path: "/",
-    name: "Home",
-    component: Home,
-  },
-  {
-    path: "/sign-in",
-    name: "SignIn",
-    component: SignIn,
-  },
-  {
-    path: "/sign-up",
-    name: "SignUp",
-    component: SignUp,
-  },
-  {
-    path: "/playlists/create",
-    name: "PlaylistCreate",
-    component: PlaylistCreate,
-  },
-  {
-    path: "/playlists/:id",
-    name: "PlaylistDetail",
-    component: PlaylistDetail,
-  },
-];
+const routes = [...Routes, ...RouteAuth, ...RoutePlaylist];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),

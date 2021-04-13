@@ -9,6 +9,9 @@
       </router-link>
       <div class="links">
         <div v-if="user">
+          <router-link :to="{ name: 'PlaylistCreate' }" class="btn-text mx-3"
+            >Create Playlist</router-link
+          >
           <span class="btn-text" @click="handleSignOut">Sign out</span>
         </div>
         <div v-else>
