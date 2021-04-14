@@ -55,6 +55,14 @@ button,
   @apply opacity-50 text-gray-800 bg-gray-100 cursor-not-allowed;
 }
 
-.playlist {
+.playlists {
   @apply flex items-center p-5 bg-white border rounded-2xl mb-6 transform hover:scale-105 transition duration-200 ease-in-out shadow-sm hover:shadow-lg;
+}
+
+.thumbnail-sm {
+  @apply w-24 h-24 bg-center bg-cover rounded-md bg-white;
+}
+
+.thumbnail-lg {
+  @apply w-80 h-80 bg-center bg-cover rounded-md bg-white;
 }

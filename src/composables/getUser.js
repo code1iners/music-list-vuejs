@@ -4,7 +4,7 @@ import { fireauth } from "../firebase/config";
 const user = ref(fireauth.currentUser);
 
 fireauth.onAuthStateChanged((_user) => {
-  console.log(`User state changed. Current user is : ${_user.email}`);
+  // console.log(`User state changed. Current user is : ${_user.email}`);
   user.value = _user;
 });
 

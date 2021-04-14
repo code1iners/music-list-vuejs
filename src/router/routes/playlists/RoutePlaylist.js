@@ -11,5 +11,6 @@ export default [
     path: "/playlists/:id",
     name: "PlaylistDetail",
     component: PlaylistDetail,
+    props: true,
   },
 ];

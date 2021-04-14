@@ -1,10 +1,10 @@
 <template>
   <div v-for="playlist in playlists" :key="playlist.id">
     <router-link :to="{ name: 'PlaylistDetail', params: { id: playlist.id } }">
-      <div class="playlist">
-        <dir class="thumbnail px-3">
+      <div class="playlists">
+        <dir class="px-3">
           <img
-            class="w-24 h-24 bg-center bg-cover rounded-md bg-white"
+            class="thumbnail-sm"
             :src="playlist.coverUrl"
             :alt="playlist.title"
           />
