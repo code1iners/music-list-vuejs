@@ -12,17 +12,28 @@
       />
       <h3 class="mt-6 font-semibold text-lg">{{ playlist.title }}</h3>
       <p class="mt-3">{{ playlist.description }}</p>
+      <div class="w-full flex mt-3 px-3">
+        <button class="btn-green mr-3 w-1/2" @click="handleShowFormToggle">
+          {{ AddSongButtonText }}
+        </button>
+        <button class="btn-red w-1/2" @click="handleSongDelete">
+          Delete Song
+        </button>
+      </div>
     </div>
     <!-- Right side (Songs) -->
-    <div class="w-3/5">
-      <button class="mb-6" @click="handleShowFormToggle">
-        {{ AddSongButtonText }}
-      </button>
+    <div class="w-3/5 mr-3">
       <!-- note. Add song form -->
-      <form class="w-full" v-if="showForm">
+      <form class="w-full" v-if="showForm" @submit.prevent="handleSongAdd">
         <input type="text" placeholder="Title" v-model="songTitle" required />
-        <input type="text" placeholder="Artist" v-model="songArtist" required />
-        <button>Add</button>
+        <input
+          class="mt-6"
+          type="text"
+          placeholder="Artist"
+          v-model="songArtist"
+          required
+        />
+        <button class="mt-6 btn-blue">Add</button>
       </form>
       <div v-if="playlist.songs.length">{{ playlist.songs }}</div>
     </div>
@@ -51,6 +62,14 @@ export default {
       }
     };
 
+    const handleSongAdd = () => {
+      console.log(songTitle.value, songArtist.value);
+    };
+
+    const handleSongDelete = () => {
+      console.log("delete song");
+    };
+
     const { document: playlist, error: playlistError } = getDocument(
       "playlists",
       route.params.id
@@ -64,6 +83,8 @@ export default {
       songArtist,
       showForm,
       handleShowFormToggle,
+      handleSongAdd,
+      handleSongDelete,
     };
   },
 };
