@@ -17,7 +17,13 @@
       </button>
     </div>
 
-    <form class="w-full mb-3" v-if="showForm" @submit.prevent="handleSongAdd">
+    {{ isPending }}
+
+    <form
+      class="w-full mb-3"
+      v-if="showForm && !isPending"
+      @submit.prevent="handleSongAdd"
+    >
       <input type="text" placeholder="Title" v-model="title" required />
       <input
         class="mt-6"
@@ -48,7 +54,10 @@ export default {
     const description = ref("");
     const showForm = ref(false);
 
-    const { documentUpdate } = useDocument("playlists", props.playlist.id);
+    const { documentUpdate, isPending } = useDocument(
+      "playlists",
+      props.playlist.id
+    );
 
     // note. Song add function.
     const handleSongAdd = async () => {
@@ -78,6 +87,7 @@ export default {
       artist,
       description,
       showForm,
+      isPending,
       handleSongAdd,
       handleShowFormToggle,
     };
