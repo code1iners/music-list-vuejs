@@ -19,7 +19,7 @@
     <input id="cover-image" type="file" @change="handleChange" />
     <div class="error fileError">{{ coverImageFileError }}</div>
     <div class="error"></div>
-    <button v-if="!isPending" class="mt-7">Create</button>
+    <button v-if="!isPending" class="btn-blue mt-7">Create</button>
     <button v-else class="mt-7" :class="{ disabled: isPending }">
       Saving...
     </button>
