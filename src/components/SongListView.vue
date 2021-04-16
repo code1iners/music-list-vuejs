@@ -1,7 +1,7 @@
 <template>
   <div
     class="flex flex-col border rounded-md py-4 px-6 mt-3 mb-3 transform hover:scale-105 transition duration-200 ease-in-out cursor-default bg-white"
-    v-for="song in songList"
+    v-for="song in playlist.songs"
     :key="song.id"
   >
     <div class="flex items-center justify-between bg-white">
@@ -17,19 +17,28 @@
           <p class="bg-white">{{ song.description }}</p>
         </div>
       </div>
-      <button class="btn-red-sm" @click="handleDelete(song.id)">Delete</button>
+      <button class="btn-red-sm" @click="handleSongDelete(song.id)">
+        Delete
+      </button>
     </div>
   </div>
 </template>
 
 <script>
+import useDocument from "../composables/useDocument";
+
 export default {
-  props: ["songs"],
+  props: ["playlist"],
   setup(props) {
-    const handleDelete = (id) => {
-      console.log(`song:${id}`);
+    const { documentUpdate } = useDocument("playlists", props.playlist.id);
+    const handleSongDelete = async (songId) => {
+      const updatedSongs = props.playlist.songs.filter((song) => {
+        return song.id != songId;
+      });
+
+      await documentUpdate({ songs: updatedSongs });
     };
-    return { songList: props.songs, handleDelete };
+    return { handleSongDelete };
   },
 };
 </script>

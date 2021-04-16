@@ -30,9 +30,7 @@
     <div class="w-3/5 mr-3 bg-white">
       <!-- note. Add song form -->
       <SongAddForm :playlist="playlist" />
-      <div class="bg-white" v-if="playlist.songs.length">
-        <SongListView :songs="playlist.songs" />
-      </div>
+      <SongListView v-if="playlist.songs.length" :playlist="playlist" />
       <div v-else>Does not exists songs yet.</div>
     </div>
   </div>
