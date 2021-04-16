@@ -31,7 +31,7 @@ input {
 }
 
 textarea {
-  @apply p-5 bg-white border border-gray-200 focus:outline-none;
+  @apply p-5 bg-white border border-gray-200 focus:outline-none border rounded-md resize-none;
 }
 
 input[type="file"] {
@@ -49,6 +49,10 @@ button,
 
 .btn-red {
   @apply text-white bg-red-500 hover:text-red-500 hover:bg-white font-normal;
+}
+
+.btn-red-sm {
+  @apply text-sm text-white bg-red-500 hover:text-red-500 hover:bg-white font-normal;
 }
 
 .btn-green {
