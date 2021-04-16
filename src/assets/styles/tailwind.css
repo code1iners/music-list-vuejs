@@ -48,19 +48,19 @@ button,
 }
 
 .btn-red {
-  @apply text-white bg-red-500 hover:text-red-500 hover:bg-white font-normal;
+  @apply text-white bg-red-500 hover:text-red-500 hover:bg-white font-normal hover:border-red-500;
 }
 
 .btn-red-sm {
-  @apply text-sm text-white bg-red-500 hover:text-red-500 hover:bg-white font-normal;
+  @apply text-sm text-white bg-red-500 hover:text-red-500 hover:bg-white font-normal hover:border-red-500;
 }
 
 .btn-green {
-  @apply text-white bg-green-500 hover:text-green-500 hover:bg-white font-normal;
+  @apply text-white bg-green-500 hover:text-green-500 hover:bg-white hover:border-green-500 font-normal;
 }
 
 .btn-blue {
-  @apply text-white bg-blue-500 hover:text-blue-500 hover:bg-white font-normal;
+  @apply text-white bg-blue-500 hover:text-blue-500 hover:bg-white font-normal hover:border-blue-500;
 }
 
 .btn-text {
@@ -71,8 +71,12 @@ button,
   @apply opacity-50 text-gray-800 bg-gray-100 cursor-not-allowed;
 }
 
-.playlists {
-  @apply flex items-center p-5 bg-white border rounded-2xl mb-6 transform hover:scale-105 transition duration-200 ease-in-out shadow-sm hover:shadow-lg;
+.box {
+  @apply p-5 bg-white border rounded-2xl shadow-lg;
+}
+
+.box-effect-scale {
+  @apply transform hover:scale-105 transition duration-200 ease-in-out shadow-sm hover:shadow-lg;
 }
 
 .thumbnail-sm {

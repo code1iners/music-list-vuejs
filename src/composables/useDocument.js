@@ -8,30 +8,31 @@ const useDocument = (collection, id) => {
 
   const documentUpdate = async (contents) => {
     error.value = null;
-
     isPending.value = true;
-    try {
-      const res = await docRef.update(contents);
-      isPending.value = false;
-      return res;
-    } catch (err) {
-      console.log(err.message);
-      isPending.value = false;
-      error.value = "could not update the document";
-    }
 
-    // await docRef
-    //   .update(contents)
-    //   .then((res) => {
-    //     console.log(`useDocument:${res}`);
-    //     isPending.value = false;
-    //     return res;
-    //   })
-    //   .catch((err) => {
-    //     console.log(`useDocument:${err.message}`);
-    //     error.value = err.message;
-    //     isPending.value = false;
-    //   });
+    await docRef
+      .update(contents)
+      .then((res) => {
+        console.log(`useDocument:${res}`);
+        isPending.value = false;
+        return res;
+      })
+      .catch((err) => {
+        console.log(`useDocument:${err.message}`);
+        error.value = err.message;
+        isPending.value = false;
+      });
+
+    // note. Other way.
+    // try {
+    //   const res = await docRef.update(contents);
+    //   isPending.value = false;
+    //   return res;
+    // } catch (err) {
+    //   console.log(err.message);
+    //   isPending.value = false;
+    //   error.value = "could not update the document";
+    // }
   };
 
   const documentDelete = async () => {
@@ -41,9 +42,8 @@ const useDocument = (collection, id) => {
     isPending.value = true;
 
     try {
-      const res = await docRef.delete();
+      await docRef.delete();
       isPending.value = false;
-      return res;
     } catch (err) {
       console.log(err.message);
       error.value = err.message;

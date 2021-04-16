@@ -1,25 +1,32 @@
 <template>
-  <div
-    class="flex flex-col border rounded-md py-4 px-6 mt-3 mb-3 transform hover:scale-105 transition duration-200 ease-in-out cursor-default bg-white"
-    v-for="song in playlist.songs"
-    :key="song.id"
-  >
-    <div class="flex items-center justify-between bg-white">
-      <div class="flex flex-col">
-        <div class="flex items-center bg-white">
-          <h3 class="font-semibold text-lg bg-white">
-            {{ song.title }}
-          </h3>
-          <span class="ml-2 text-sm text-gray-500 bg-white">by</span>
-          <span class="ml-2 text-sm bg-white">{{ song.artist }}</span>
-        </div>
-        <div>
-          <p class="bg-white">{{ song.description }}</p>
+  <div class="flex flex-col mt-3 cursor-default">
+    <div v-if="playlist.songs.length" class="bg-white">
+      <div v-for="song in playlist.songs" :key="song.id" class="mb-3">
+        <div class="box box-effect-scale flex items-center justify-between">
+          <div class="flex flex-col">
+            <div class="flex items-center bg-white">
+              <h3 class="font-semibold text-lg bg-white">
+                {{ song.title }}
+              </h3>
+              <span class="ml-2 text-sm text-gray-500 bg-white">by</span>
+              <span class="ml-2 text-sm bg-white">{{ song.artist }}</span>
+            </div>
+            <div>
+              <p class="bg-white">{{ song.description }}</p>
+            </div>
+          </div>
+          <div
+            class="btn-text bg-white text-sm"
+            @click="handleSongDelete(song.id)"
+          >
+            Delete
+          </div>
         </div>
       </div>
-      <button class="btn-red-sm" @click="handleSongDelete(song.id)">
-        Delete
-      </button>
+    </div>
+
+    <div v-else class="w-full text-center box box-effect-scale">
+      Does not exists songs yet.
     </div>
   </div>
 </template>

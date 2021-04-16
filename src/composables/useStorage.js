@@ -1,5 +1,5 @@
 import { ref } from "vue";
-import { firestorage } from "@/firebase/config";
+import { firestorage } from "../firebase/config";
 import getUser from "../composables/getUser";
 
 const { user } = getUser();
@@ -10,7 +10,23 @@ const useStorage = () => {
   const filePath = ref(null);
   const isPending = ref(false);
 
-  const uploadImage = async (file) => {
+  const imageDelete = async (path) => {
+    isPending.value = true;
+
+    const storageRef = firestorage.ref(path);
+    console.log(`storageRef:${storageRef}`);
+    storageRef
+      .delete()
+      .then((res) => {
+        console.log(`imageDelete:${res}`);
+      })
+      .catch((err) => {
+        console.log(err.message);
+        error.value = err.message;
+      });
+  };
+
+  const imageUpload = async (file) => {
     isPending.value = true;
     if (user) {
       filePath.value = `covers/${user.value.uid}/${file.name}`;
@@ -33,7 +49,8 @@ const useStorage = () => {
     filePath,
     isPending,
     error,
-    uploadImage,
+    imageUpload,
+    imageDelete,
   };
 };
 

@@ -37,7 +37,7 @@ import { timestamp } from "@/firebase/config";
 export default {
   setup() {
     const router = useRouter();
-    const { url, filePath, error: storageError, uploadImage } = useStorage();
+    const { url, filePath, error: storageError, imageUpload } = useStorage();
     const { addDoc, error: collectionError } = useCollection("playlists");
     const { user } = getUser();
 
@@ -50,7 +50,7 @@ export default {
     const handleSubmit = async () => {
       if (coverImageFile.value) {
         isPending.value = true;
-        await uploadImage(coverImageFile.value);
+        await imageUpload(coverImageFile.value);
         await addDoc({
           title: title.value,
           description: description.value,
