@@ -26,7 +26,7 @@
     <div class="w-3/5 mr-3 bg-white">
       <!-- note. Add song form -->
       <SongAddForm :playlist="playlist" :isOwner="isOwner" />
-      <SongListView :playlist="playlist" />
+      <SongListView :playlist="playlist" :isOwner="isOwner" />
     </div>
   </div>
 </template>

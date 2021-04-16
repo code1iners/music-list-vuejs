@@ -16,6 +16,7 @@
             </div>
           </div>
           <div
+            v-if="isOwner"
             class="btn-text bg-white text-sm"
             @click="handleSongDelete(song.id)"
           >
@@ -35,7 +36,7 @@
 import useDocument from "../composables/useDocument";
 
 export default {
-  props: ["playlist"],
+  props: ["playlist", "isOwner"],
   setup(props) {
     const { documentUpdate } = useDocument("playlists", props.playlist.id);
     const handleSongDelete = async (songId) => {
