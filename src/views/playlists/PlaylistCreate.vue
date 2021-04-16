@@ -51,7 +51,7 @@ export default {
       if (coverImageFile.value) {
         isPending.value = true;
         await imageUpload(coverImageFile.value);
-        await addDoc({
+        const res = await addDoc({
           title: title.value,
           description: description.value,
           userId: user.value.uid,
@@ -65,8 +65,7 @@ export default {
         isPending.value = false;
 
         if (!collectionError.value) {
-          console.log("playlist added");
-          router.push({ name: "Home" });
+          router.push({ name: "PlaylistDetail", params: { id: res.id } });
         }
       }
     };

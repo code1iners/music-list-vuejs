@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col mt-3 cursor-default">
+  <div class="flex flex-col cursor-default">
     <div v-if="playlist.songs.length" class="bg-white">
       <div v-for="song in playlist.songs" :key="song.id" class="mb-3">
         <div class="box box-effect-scale flex items-center justify-between">

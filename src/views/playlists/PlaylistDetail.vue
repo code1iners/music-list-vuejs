@@ -14,19 +14,18 @@
         {{ playlist.title }}
       </h3>
       <p class="mt-3 bg-white">{{ playlist.description }}</p>
-      <div class="w-full flex mt-6 px-3 bg-white justify-center">
-        <button
-          class="btn-red w-3/5 uppercase text-sm font-normal tracking-wide"
-          @click="handlePlaylistDelete"
-        >
-          Delete Playlist
-        </button>
-      </div>
+      <button
+        v-if="isOwner"
+        class="btn-red mt-3 w-3/5 uppercase text-sm font-normal tracking-wide"
+        @click="handlePlaylistDelete"
+      >
+        Delete Playlist
+      </button>
     </div>
     <!-- Right side (Songs) -->
     <div class="w-3/5 mr-3 bg-white">
       <!-- note. Add song form -->
-      <SongAddForm :playlist="playlist" />
+      <SongAddForm :playlist="playlist" :isOwner="isOwner" />
       <SongListView :playlist="playlist" />
     </div>
   </div>
@@ -37,8 +36,10 @@ import { useRoute, useRouter } from "vue-router";
 import getDocument from "../../composables/getDocument";
 import useDocument from "../../composables/useDocument";
 import useStorage from "../../composables/useStorage";
+import getUser from "../../composables/getUser";
 import SongAddForm from "../../components/SongAddForm.vue";
 import SongListView from "../../components/SongListView.vue";
+import { computed } from "@vue/runtime-core";
 
 export default {
   components: { SongAddForm, SongListView },
@@ -51,6 +52,13 @@ export default {
     );
     const { documentDelete } = useDocument("playlists", route.params.id);
     const { imageDelete } = useStorage();
+    const { user } = getUser();
+
+    const isOwner = computed(() => {
+      return (
+        playlist.value && user.value && playlist.value.userId == user.value.uid
+      );
+    });
 
     const handlePlaylistDelete = async () => {
       console.log(router);
@@ -63,6 +71,7 @@ export default {
       playlist,
       getDocumentError,
       handlePlaylistDelete,
+      isOwner,
     };
   },
 };

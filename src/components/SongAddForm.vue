@@ -1,21 +1,23 @@
 <template>
   <div class="flex flex-col">
-    <button
-      v-if="showForm"
-      class="btn-blue uppercase text-sm font-normal tracking-wide"
-      @click="handleShowFormToggle"
-    >
-      Cancel
-    </button>
-    <button
-      v-if="!showForm"
-      class="btn-blue uppercase text-sm font-normal tracking-wide"
-      @click="handleShowFormToggle"
-    >
-      Add Song
-    </button>
+    <div v-if="isOwner" class="mb-3">
+      <button
+        v-if="showForm"
+        class="btn-blue uppercase text-sm font-normal tracking-wide w-full"
+        @click="handleShowFormToggle"
+      >
+        Cancel
+      </button>
+      <button
+        v-if="!showForm"
+        class="btn-blue uppercase text-sm font-normal tracking-wide w-full"
+        @click="handleShowFormToggle"
+      >
+        Add Song
+      </button>
+    </div>
 
-    <form class="w-full" v-if="showForm" @submit.prevent="handleSongAdd">
+    <form class="w-full mb-3" v-if="showForm" @submit.prevent="handleSongAdd">
       <input type="text" placeholder="Title" v-model="title" required />
       <input
         class="mt-6"
@@ -39,7 +41,7 @@ import { ref } from "vue";
 import useDocument from "../composables/useDocument";
 
 export default {
-  props: ["playlist"],
+  props: ["playlist", "isOwner"],
   setup(props) {
     const title = ref("");
     const artist = ref("");
