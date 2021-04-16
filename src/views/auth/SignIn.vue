@@ -9,7 +9,7 @@
       v-model="password"
     />
     <div v-if="error" class="error mt-10">{{ error }}</div>
-    <button v-if="!isPending" class="mt-10">Sign In</button>
+    <button v-if="!isPending" class="mt-10 btn-blue">Sign In</button>
     <button v-else class="mt-10" :class="{ disabled: isPending }">
       Loading...
     </button>

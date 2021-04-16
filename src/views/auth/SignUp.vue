@@ -15,7 +15,7 @@
       v-model="password"
     />
     <div v-if="error" class="error mt-10">{{ error }}</div>
-    <button v-if="!isPending" class="mt-10">Sign Up</button>
+    <button v-if="!isPending" class="mt-10 btn-green">Sign Up</button>
     <button v-else class="mt-10" :class="{ disabled: isPending }">
       Loading...
     </button>

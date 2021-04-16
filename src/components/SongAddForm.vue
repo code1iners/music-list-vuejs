@@ -17,8 +17,6 @@
       </button>
     </div>
 
-    {{ isPending }}
-
     <form
       class="w-full mb-3"
       v-if="showForm && !isPending"
