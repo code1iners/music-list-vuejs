@@ -68,7 +68,7 @@ button,
 }
 
 .btn-text {
-  @apply tracking-wide uppercase cursor-pointer hover:text-green-500 py-2 px-3;
+  @apply tracking-wide uppercase cursor-pointer hover:text-green-500 py-2 px-3 bg-white;
 }
 
 .disabled {

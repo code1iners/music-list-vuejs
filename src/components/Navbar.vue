@@ -11,10 +11,11 @@
       </router-link>
       <div class="links">
         <div v-if="user" class="bg-white">
-          <router-link
-            :to="{ name: 'PlaylistCreate' }"
-            class="btn-text mx-3 bg-white"
+          <router-link :to="{ name: 'PlaylistCreate' }" class="btn-text"
             >Create Playlist</router-link
+          >
+          <router-link :to="{ name: 'PlaylistUser' }" class="btn-text"
+            >My Playlist</router-link
           >
           <span class="btn-text bg-white" @click="handleSignOut">Sign out</span>
         </div>
